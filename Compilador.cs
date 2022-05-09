@@ -10,14 +10,13 @@ using System.Windows.Forms;
 
 namespace Compilador
 {
-    public partial class Form1 : Form
+    public partial class Compilador : Form
     {
-        public Form1()
+        public Compilador()
         {
             InitializeComponent();
         }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }
