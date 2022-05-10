@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Compilador
 {
-    public partial class Compilador : Form
+    public partial class FrmCompilador : Form
     {
-        public Compilador()
+        public FrmCompilador()
         {
             InitializeComponent();
         }
