@@ -198,7 +198,7 @@
             // txtFuente
             // 
             this.txtFuente.BackColor = System.Drawing.Color.Black;
-            this.txtFuente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFuente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFuente.ForeColor = System.Drawing.Color.Lime;
             this.txtFuente.Location = new System.Drawing.Point(84, 19);
             this.txtFuente.Name = "txtFuente";
@@ -222,7 +222,7 @@
             // txtNumLineaFuente
             // 
             this.txtNumLineaFuente.BackColor = System.Drawing.Color.Black;
-            this.txtNumLineaFuente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNumLineaFuente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNumLineaFuente.ForeColor = System.Drawing.Color.Lime;
             this.txtNumLineaFuente.Location = new System.Drawing.Point(20, 20);
             this.txtNumLineaFuente.Name = "txtNumLineaFuente";
@@ -245,7 +245,7 @@
             // txtLineaTokens
             // 
             this.txtLineaTokens.BackColor = System.Drawing.Color.Black;
-            this.txtLineaTokens.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLineaTokens.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLineaTokens.ForeColor = System.Drawing.Color.Lime;
             this.txtLineaTokens.Location = new System.Drawing.Point(18, 20);
             this.txtLineaTokens.Name = "txtLineaTokens";
@@ -257,7 +257,7 @@
             // txtTokens
             // 
             this.txtTokens.BackColor = System.Drawing.Color.Black;
-            this.txtTokens.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTokens.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTokens.ForeColor = System.Drawing.Color.Lime;
             this.txtTokens.Location = new System.Drawing.Point(82, 20);
             this.txtTokens.Name = "txtTokens";
@@ -301,7 +301,7 @@
             this.token});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Lime;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Yellow;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Desktop;
@@ -360,7 +360,7 @@
             this.desc});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Lime;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Yellow;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
