@@ -162,13 +162,30 @@ namespace Compilador
                 foreach (var item in filadata)
                 {
                     palabra++;
-                    if ((item == "int" || item == "string" || item == "bool" || item == "double" || item == "const") && CheckSintaxis(item, filadata,palabra))
+                    try
                     {
-                        ide++;
-                        dtgVariables.Rows.Add("IDEN" + ide, item, filadata.ElementAt(palabra), filadata.ElementAt(palabra + 2));
+                        if ((item == "int" || item == "string" || item == "bool" || item == "double" || item == "const") && CheckSintaxis(item, filadata, palabra))
+                        {
+                            ide++;
+                            //Expresion
+                            if (CheckVariable(filadata[palabra + 2]) != "null" && (filadata[palabra + 3] == "+" || filadata[palabra + 3] == "-" || filadata[palabra + 3] == "/" || filadata[palabra + 3] == "*" || filadata[palabra + 3] == "^") && CheckVariable(filadata[palabra + 4]) != "null")
+                            {
+                                string exp = filadata[palabra + 2] + " " + filadata[palabra + 3] + " " + filadata[palabra + 4];
+                                dtgVariables.Rows.Add("IDEN" + ide, item, filadata.ElementAt(palabra), exp);
+                            }
+                            else
+                            {
+                                //Contenido solo
+                                dtgVariables.Rows.Add("IDEN" + ide, item, filadata.ElementAt(palabra), filadata.ElementAt(palabra + 2));
+                            }
+                        }
                     }
-                    else
-                    { }
+                    catch (Exception)
+                    {
+                        
+                        continue;
+                    }
+
                 }
                 palabra = 0;
             }
@@ -254,6 +271,7 @@ namespace Compilador
                 else if (i != 0 && palabras[i - 1] == "=")
                 {
                     contenido++;
+
                     txtTokens.AppendText("CONT"+contenido);
                 }
                 else
