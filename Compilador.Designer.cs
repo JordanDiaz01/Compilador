@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -106,14 +106,14 @@
             // nuevoToolStripMenuItem
             // 
             this.nuevoToolStripMenuItem.Name = "nuevoToolStripMenuItem";
-            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevoToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.nuevoToolStripMenuItem.Text = "Nuevo";
             this.nuevoToolStripMenuItem.Click += new System.EventHandler(this.nuevoToolStripMenuItem_Click);
             // 
             // abriToolStripMenuItem
             // 
             this.abriToolStripMenuItem.Name = "abriToolStripMenuItem";
-            this.abriToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.abriToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.abriToolStripMenuItem.Text = "Abrir";
             this.abriToolStripMenuItem.Click += new System.EventHandler(this.abriToolStripMenuItem_Click);
             // 
@@ -124,28 +124,28 @@
             this.tokensToolStripMenuItem,
             this.tablaDeSimbolosToolStripMenuItem});
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.guardarToolStripMenuItem.Text = "Guardar";
             this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
             // programaFuenteToolStripMenuItem
             // 
             this.programaFuenteToolStripMenuItem.Name = "programaFuenteToolStripMenuItem";
-            this.programaFuenteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.programaFuenteToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.programaFuenteToolStripMenuItem.Text = "Programa fuente";
             this.programaFuenteToolStripMenuItem.Click += new System.EventHandler(this.programaFuenteToolStripMenuItem_Click);
             // 
             // tokensToolStripMenuItem
             // 
             this.tokensToolStripMenuItem.Name = "tokensToolStripMenuItem";
-            this.tokensToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tokensToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.tokensToolStripMenuItem.Text = "Tokens";
             this.tokensToolStripMenuItem.Click += new System.EventHandler(this.tokensToolStripMenuItem_Click);
             // 
             // tablaDeSimbolosToolStripMenuItem
             // 
             this.tablaDeSimbolosToolStripMenuItem.Name = "tablaDeSimbolosToolStripMenuItem";
-            this.tablaDeSimbolosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tablaDeSimbolosToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.tablaDeSimbolosToolStripMenuItem.Text = "Tabla de símbolos ";
             this.tablaDeSimbolosToolStripMenuItem.Click += new System.EventHandler(this.tablaDeSimbolosToolStripMenuItem_Click);
             // 
@@ -161,7 +161,7 @@
             // limpiarTodoToolStripMenuItem
             // 
             this.limpiarTodoToolStripMenuItem.Name = "limpiarTodoToolStripMenuItem";
-            this.limpiarTodoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.limpiarTodoToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.limpiarTodoToolStripMenuItem.Text = "Limpiar todo";
             this.limpiarTodoToolStripMenuItem.Click += new System.EventHandler(this.limpiarTodoToolStripMenuItem_Click);
             // 
@@ -171,20 +171,20 @@
             this.oscuroToolStripMenuItem,
             this.claroToolStripMenuItem});
             this.temaToolStripMenuItem.Name = "temaToolStripMenuItem";
-            this.temaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.temaToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.temaToolStripMenuItem.Text = "Tema";
             // 
             // oscuroToolStripMenuItem
             // 
             this.oscuroToolStripMenuItem.Name = "oscuroToolStripMenuItem";
-            this.oscuroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.oscuroToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.oscuroToolStripMenuItem.Text = "Oscuro";
             this.oscuroToolStripMenuItem.Click += new System.EventHandler(this.oscuroToolStripMenuItem_Click);
             // 
             // claroToolStripMenuItem
             // 
             this.claroToolStripMenuItem.Name = "claroToolStripMenuItem";
-            this.claroToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.claroToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.claroToolStripMenuItem.Text = "Claro";
             this.claroToolStripMenuItem.Click += new System.EventHandler(this.claroToolStripMenuItem_Click);
             // 
@@ -198,6 +198,7 @@
             // txtFuente
             // 
             this.txtFuente.BackColor = System.Drawing.Color.Black;
+            this.txtFuente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFuente.ForeColor = System.Drawing.Color.Lime;
             this.txtFuente.Location = new System.Drawing.Point(84, 19);
             this.txtFuente.Name = "txtFuente";
@@ -221,6 +222,7 @@
             // txtNumLineaFuente
             // 
             this.txtNumLineaFuente.BackColor = System.Drawing.Color.Black;
+            this.txtNumLineaFuente.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNumLineaFuente.ForeColor = System.Drawing.Color.Lime;
             this.txtNumLineaFuente.Location = new System.Drawing.Point(20, 20);
             this.txtNumLineaFuente.Name = "txtNumLineaFuente";
@@ -243,6 +245,7 @@
             // txtLineaTokens
             // 
             this.txtLineaTokens.BackColor = System.Drawing.Color.Black;
+            this.txtLineaTokens.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLineaTokens.ForeColor = System.Drawing.Color.Lime;
             this.txtLineaTokens.Location = new System.Drawing.Point(18, 20);
             this.txtLineaTokens.Name = "txtLineaTokens";
@@ -254,6 +257,7 @@
             // txtTokens
             // 
             this.txtTokens.BackColor = System.Drawing.Color.Black;
+            this.txtTokens.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTokens.ForeColor = System.Drawing.Color.Lime;
             this.txtTokens.Location = new System.Drawing.Point(82, 20);
             this.txtTokens.Name = "txtTokens";
@@ -295,14 +299,14 @@
             this.ID,
             this.nombreid,
             this.token});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Lime;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Yellow;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtgSimbolos.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Yellow;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgSimbolos.DefaultCellStyle = dataGridViewCellStyle1;
             this.dtgSimbolos.GridColor = System.Drawing.Color.White;
             this.dtgSimbolos.Location = new System.Drawing.Point(6, 13);
             this.dtgSimbolos.Name = "dtgSimbolos";
@@ -354,14 +358,14 @@
             this.linea,
             this.error,
             this.desc});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Lime;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Yellow;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtgErrores.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Yellow;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgErrores.DefaultCellStyle = dataGridViewCellStyle2;
             this.dtgErrores.GridColor = System.Drawing.Color.White;
             this.dtgErrores.Location = new System.Drawing.Point(21, 19);
             this.dtgErrores.Name = "dtgErrores";
@@ -413,14 +417,14 @@
             this.tipo,
             this.variables,
             this.valor});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Lime;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Yellow;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtgVariables.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Yellow;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgVariables.DefaultCellStyle = dataGridViewCellStyle3;
             this.dtgVariables.GridColor = System.Drawing.Color.White;
             this.dtgVariables.Location = new System.Drawing.Point(6, 19);
             this.dtgVariables.Name = "dtgVariables";
