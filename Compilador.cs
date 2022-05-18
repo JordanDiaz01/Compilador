@@ -31,23 +31,33 @@ namespace Compilador
         {
             //Palabras reservadas
             PalabrasReservadas.Add(new Tuple<string, string>("readline","PR01"));
+            PalabrasReservadas.Add(new Tuple<string, string>("ReadLine", "PR01"));
             PalabrasReservadas.Add(new Tuple<string, string>("printin", "PR02"));
-
-            PalabrasReservadas.Add(new Tuple<string, string>("string", "PR03"));
-            PalabrasReservadas.Add(new Tuple<string, string>("int", "PR04"));
-            PalabrasReservadas.Add(new Tuple<string, string>("bool", "PR05"));
-            PalabrasReservadas.Add(new Tuple<string, string>("double", "PR06"));
-            PalabrasReservadas.Add(new Tuple<string, string>("const", "PR07"));
+            PalabrasReservadas.Add(new Tuple<string, string>("PrintIn", "PR02"));
 
             PalabrasReservadas.Add(new Tuple<string, string>("for", "PR08"));
             PalabrasReservadas.Add(new Tuple<string, string>("while", "PR09"));
             PalabrasReservadas.Add(new Tuple<string, string>("do", "PR10"));
             PalabrasReservadas.Add(new Tuple<string, string>("if", "PR11"));
             PalabrasReservadas.Add(new Tuple<string, string>("else", "PR12"));
+
             PalabrasReservadas.Add(new Tuple<string, string>("inicio", "PR13"));
             PalabrasReservadas.Add(new Tuple<string, string>("final", "PR14"));
-            PalabrasReservadas.Add(new Tuple<string, string>("INICIO", "PR13"));
-            PalabrasReservadas.Add(new Tuple<string, string>("FINAL", "PR14"));
+            PalabrasReservadas.Add(new Tuple<string, string>("Inicio", "PR13"));
+            PalabrasReservadas.Add(new Tuple<string, string>("Final", "PR14"));
+
+            //Tipos de datos
+            PalabrasReservadas.Add(new Tuple<string, string>("string", "PR03"));
+            PalabrasReservadas.Add(new Tuple<string, string>("int", "PR04"));
+            PalabrasReservadas.Add(new Tuple<string, string>("bool", "PR05"));
+            PalabrasReservadas.Add(new Tuple<string, string>("double", "PR06"));
+            PalabrasReservadas.Add(new Tuple<string, string>("const", "PR07"));
+            
+            PalabrasReservadas.Add(new Tuple<string, string>("String", "PR03"));
+            PalabrasReservadas.Add(new Tuple<string, string>("Int", "PR04"));
+            PalabrasReservadas.Add(new Tuple<string, string>("Bool", "PR05"));
+            PalabrasReservadas.Add(new Tuple<string, string>("Double", "PR06"));
+            PalabrasReservadas.Add(new Tuple<string, string>("Const", "PR07"));
 
             //Identificadores
             PalabrasReservadas.Add(new Tuple<string, string>("iden", "IDEN"));
@@ -112,7 +122,7 @@ namespace Compilador
 
                 }
             }
-            return null;
+            return "null";
         }
 
         public string CheckCom(string STR, string FirstString, string LastString)
@@ -204,8 +214,7 @@ namespace Compilador
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error en la captura del codigo fuente intentelo otra vez");
-                    return;
+                    continue;
                 }
 
                 //Tokens Normales
@@ -226,7 +235,7 @@ namespace Compilador
                 //Comentario
                 else if (first == "/")
                 {
-                    while (palabras[i] != ";")
+                    while (palabras[i] != ";" || Encontrar(palabras[i]) != "null")
                     {
                         i++;
                     }
@@ -248,7 +257,7 @@ namespace Compilador
                 //Letrero
                 else if (first == "\'")
                 {
-                    while (palabras[i] != ";")
+                    while (palabras[i] != ";" || Encontrar(palabras[i]) != "null")
                     {
                         i++;
                     }
@@ -273,6 +282,10 @@ namespace Compilador
                     contenido++;
 
                     txtTokens.AppendText("CONT"+contenido);
+                }
+                else if ((palabras[i-1] == "(" && Regex.IsMatch(palabras[i], @"^[0-9]+$")) || (Regex.IsMatch(palabras[i], @"^[0-9]+$") && palabras[i + 1] == ")"))
+                {
+                    txtTokens.AppendText("NUM ");
                 }
                 else
                 {
@@ -387,6 +400,17 @@ namespace Compilador
 
         private void abriToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            id = 0;
+            ICodigo = 0;
+            txtFuente.Text = "";
+            txtTokens.Text = "";
+            txtLineaTokens.Text = "";
+            txtNumLineaFuente.Text = "";
+
+            dtgErrores.Rows.Clear();
+            dtgSimbolos.Rows.Clear();
+            dtgVariables.Rows.Clear();
+
             string linea, archivo;
             txtFuente.Clear();
             OpenFileDialog openFile = new OpenFileDialog();
@@ -630,6 +654,12 @@ namespace Compilador
                 dtgSimbolos.Rows.Clear();
                 dtgVariables.Rows.Clear();
             }
+        }
+
+        private void documentacionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Documentacion doc = new Documentacion();
+            doc.Show();
         }
     }
 }
