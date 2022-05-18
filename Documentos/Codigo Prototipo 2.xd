@@ -1,0 +1,12 @@
+INICIO { ;
+/Esto es un comentario ;
+'Esto es un letrero ;
+bool bandera = true ;
+} ;
+int i = 0 ;
+string saludo = hola ;
+do ( 10 > i ) ;
+{ ;
+printin ( saludo ) ;
+} ;
+final ;
