@@ -303,7 +303,7 @@ namespace Compilador
                 {
                     if (err == "ERROR")
                     {
-                        dtgErrores.Rows.Add(fila, err, "error de sintaxis");
+                        dtgErrores.Rows.Add(fila, err, "ERROR");
                     }
                 }
 
@@ -390,13 +390,14 @@ namespace Compilador
                 }
             }
         }
-        private void txtFuente_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                txtFuente.AppendText(" ;");
-            }
-        }
+
+        //private void txtFuente_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        txtFuente.Lines.
+        //    }
+        //}
 
         private void abriToolStripMenuItem_Click(object sender, EventArgs e)
         {
