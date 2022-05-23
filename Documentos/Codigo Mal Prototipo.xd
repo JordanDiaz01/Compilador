@@ -1,0 +1,7 @@
+INICIO ;
+inT nume = 2 ;
+iF ( nume == 3 ) ;
+{ ;
+printIN ( hola ) ;
+} ;
+/Esto esta mal ;

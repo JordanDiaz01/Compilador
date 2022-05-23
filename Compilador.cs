@@ -75,6 +75,7 @@ namespace Compilador
             PalabrasReservadas.Add(new Tuple<string, string>(">=", "COMP03"));
             PalabrasReservadas.Add(new Tuple<string, string>("<=", "COMP04"));
             PalabrasReservadas.Add(new Tuple<string, string>("<>", "COMP05"));
+            PalabrasReservadas.Add(new Tuple<string, string>("==", "COMP06"));
 
             //Operadores Logicos
             PalabrasReservadas.Add(new Tuple<string, string>("&&", "LOG01"));
@@ -192,7 +193,7 @@ namespace Compilador
                     }
                     catch (Exception)
                     {
-                        
+
                         continue;
                     }
 
@@ -217,100 +218,129 @@ namespace Compilador
                     continue;
                 }
 
-                //Tokens Normales
-                if (PalabrasReservadas.Any(m => m.Item1 == palabras[i]))
+                try
                 {
-                    txtTokens.AppendText(Encontrar(palabras[i]) + " ");
-                }
-                //Salto de linea
-                else if (palabras[i] == ";")
-                {
-                    txtTokens.AppendText(";\n");
-                }
-                //Checkeo de variables en el codigo
-                else if(CheckVariable(palabras[i]) != "null")
-                {
-                    txtTokens.AppendText(CheckVariable(palabras[i]) + " ");
-                }
-                //Comentario
-                else if (first == "/")
-                {
-                    while (palabras[i] != ";" || Encontrar(palabras[i]) != "null")
-                    {
-                        i++;
-                    }
-                    txtTokens.AppendText("COM ;\n");
-                    foreach (DataGridViewRow row in dtgSimbolos.Rows)
-                    {
-                        string codigo = Convert.ToString(row.Cells["token"].Value);
-                        if ("COM" == codigo)
-                        {
-                            Esta = true;
-                        }
-                    }
-                    if (!Esta)
-                    {
-                        dtgSimbolos.Rows.Add(id, "Comentario", "COM");
-                        Esta = false;
-                    }
-                }
-                //Letrero
-                else if (first == "\'")
-                {
-                    while (palabras[i] != ";" || Encontrar(palabras[i]) != "null")
-                    {
-                        i++;
-                    }
-                    txtTokens.AppendText("LET ;\n");
-                    foreach (DataGridViewRow row in dtgSimbolos.Rows)
-                    {
-                        string codigo = Convert.ToString(row.Cells["token"].Value);
-                        if ("LET" == codigo)
-                        {
-                            Esta = true;
-                        }
-                    }
-                    if (!Esta)
-                    {
-                        dtgSimbolos.Rows.Add(id, "Letrero", "LET");
-                        Esta = false;
-                    }
-                }
-                //Checkeo de contenidos
-                else if (i != 0 && palabras[i - 1] == "=")
-                {
-                    contenido++;
 
-                    txtTokens.AppendText("CONT"+contenido);
                 }
-                else if ((palabras[i-1] == "(" && Regex.IsMatch(palabras[i], @"^[0-9]+$")) || (Regex.IsMatch(palabras[i], @"^[0-9]+$") && palabras[i + 1] == ")"))
+                catch (Exception)
                 {
-                    txtTokens.AppendText("NUM ");
+
+                    throw;
                 }
-                else
+                try
                 {
-                    txtTokens.AppendText("ERROR ");
+                    //Tokens Normales
+                    if (PalabrasReservadas.Any(m => m.Item1 == palabras[i]))
+                    {
+                        txtTokens.AppendText(Encontrar(palabras[i]) + " ");
+                    }
+                    //Salto de linea
+                    else if (palabras[i] == ";")
+                    {
+                        txtTokens.AppendText(";\n");
+                    }
+                    //Checkeo de variables en el codigo
+                    else if (CheckVariable(palabras[i]) != "null")
+                    {
+                        txtTokens.AppendText(CheckVariable(palabras[i]) + " ");
+                    }
+                    //Comentario
+                    else if (first == "/")
+                    {
+                        while (palabras[i] != ";" || Encontrar(palabras[i]) != "null")
+                        {
+                            i++;
+                        }
+                        txtTokens.AppendText("COM ;\n");
+                        foreach (DataGridViewRow row in dtgSimbolos.Rows)
+                        {
+                            string codigo = Convert.ToString(row.Cells["token"].Value);
+                            if ("COM" == codigo)
+                            {
+                                Esta = true;
+                            }
+                        }
+                        if (!Esta)
+                        {
+                            dtgSimbolos.Rows.Add(id, "Comentario", "COM");
+                            Esta = false;
+                        }
+                    }
+                    //Letrero
+                    else if (first == "\'")
+                    {
+                        while (palabras[i] != ";" || Encontrar(palabras[i]) != "null")
+                        {
+                            i++;
+                        }
+                        txtTokens.AppendText("LET ;\n");
+                        foreach (DataGridViewRow row in dtgSimbolos.Rows)
+                        {
+                            string codigo = Convert.ToString(row.Cells["token"].Value);
+                            if ("LET" == codigo)
+                            {
+                                Esta = true;
+                            }
+                        }
+                        if (!Esta)
+                        {
+                            dtgSimbolos.Rows.Add(id, "Letrero", "LET");
+                            Esta = false;
+                        }
+                    }
+                    //Checkeo de contenidos
+                    else if (i != 0 && palabras[i - 1] == "=" && CheckVariable(palabras[i - 2]) != "null")
+                    {
+                        contenido++;
+                        txtTokens.AppendText("CONT "+contenido);
+                        if (Regex.IsMatch(palabras[i], @"^\d{0,10}[.]\d{0,10}"))
+                        {
+                            dtgVariables.Rows.Add("CONT" + contenido, "Decimal", "CONT" + contenido, palabras[i]);
+                        }
+                        else if (Regex.IsMatch(palabras[i], @"^\d{0,10}"))
+                        {
+                            dtgVariables.Rows.Add("CONT" + contenido, "Entero", "CONT" + contenido, palabras[i]);
+                        }
+                    }
+                    else if (i != 0 && (palabras[i - 1] == "(" && Regex.IsMatch(palabras[i], @"^[0-9]+$")) || (Regex.IsMatch(palabras[i], @"^[0-9]+$") && palabras[i + 1] == ")"))
+                    {
+                        txtTokens.AppendText("NUM ");
+                    }
+                    else
+                    {
+
+                        txtTokens.AppendText("ERROR ");
+                    }
+
                 }
+                catch (Exception)
+                {
+
+                    continue;
+                }
+
+
             }
             //Errores
             fila = 0;
+            int numpal = 0;
             foreach (var item in txtTokens.Lines)
             {
+                numpal = 0;
                 fila++;
                 string[] filadata = item.Split();
 
                 foreach (var err in filadata)
                 {
+                    numpal++;
                     if (err == "ERROR")
                     {
-                        dtgErrores.Rows.Add(fila, err, "ERROR");
+                        dtgErrores.Rows.Add(fila, err, "Error en la fila " + fila + " palabra " + numpal);
                     }
                 }
-
             }
-        }
 
-        
+        }
 
         public bool CheckSintaxis(string tipo,string[] data,int palabra)
         {
@@ -340,7 +370,7 @@ namespace Compilador
                     return false;
 
                 case "string":
-                    if (!Regex.IsMatch(valor, @"^[0-9]+$"))
+                    if (!Regex.IsMatch(valor, @"^[0-9]\d{0,10} +$"))
                     {
                         return true;
                     }
@@ -354,7 +384,7 @@ namespace Compilador
                     return false;
 
                 case "double":
-                    if (Regex.IsMatch(valor, @"^[0-9]+$"))
+                    if (Regex.IsMatch(valor, @"^\d{0,10}[.]\d{0,10}"))
                     {
                         return true;
                     }
@@ -574,15 +604,15 @@ namespace Compilador
             dtgSimbolos.DefaultCellStyle.ForeColor = Color.Lime;
             dtgVariables.DefaultCellStyle.ForeColor = Color.Lime;
 
-            dtgVariables.DefaultCellStyle.BackColor = Color.Black;
+            dtgErrores.DefaultCellStyle.BackColor = Color.Black;
             dtgSimbolos.DefaultCellStyle.BackColor = Color.Black;
             dtgVariables.DefaultCellStyle.BackColor = Color.Black;
 
-            dtgVariables.DefaultCellStyle.SelectionBackColor = Color.Yellow;
+            dtgErrores.DefaultCellStyle.SelectionBackColor = Color.Yellow;
             dtgSimbolos.DefaultCellStyle.SelectionBackColor = Color.Yellow;
             dtgVariables.DefaultCellStyle.SelectionBackColor = Color.Yellow;
 
-            dtgVariables.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dtgErrores.DefaultCellStyle.SelectionForeColor = Color.Black;
             dtgSimbolos.DefaultCellStyle.SelectionForeColor = Color.Black;
             dtgVariables.DefaultCellStyle.SelectionForeColor = Color.Black;
 
@@ -612,15 +642,15 @@ namespace Compilador
             dtgSimbolos.DefaultCellStyle.ForeColor = Color.Black;
             dtgVariables.DefaultCellStyle.ForeColor = Color.Black;
 
-            dtgVariables.DefaultCellStyle.BackColor = Color.DarkGray;
+            dtgErrores.DefaultCellStyle.BackColor = Color.DarkGray;
             dtgSimbolos.DefaultCellStyle.BackColor = Color.DarkGray;
             dtgVariables.DefaultCellStyle.BackColor = Color.DarkGray;
 
-            dtgVariables.DefaultCellStyle.SelectionBackColor = Color.Blue;
+            dtgErrores.DefaultCellStyle.SelectionBackColor = Color.Blue;
             dtgSimbolos.DefaultCellStyle.SelectionBackColor = Color.Blue;
             dtgVariables.DefaultCellStyle.SelectionBackColor = Color.Blue;
 
-            dtgVariables.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dtgErrores.DefaultCellStyle.SelectionForeColor = Color.Black;
             dtgSimbolos.DefaultCellStyle.SelectionForeColor = Color.Black;
             dtgVariables.DefaultCellStyle.SelectionForeColor = Color.Black;
 
@@ -661,6 +691,42 @@ namespace Compilador
         {
             Documentacion doc = new Documentacion();
             doc.Show();
+        }
+
+        private void dtgVariables_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+
+        }
+
+        private void tablaDeVariablesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dtgVariables.RowCount == 0)
+            {
+                MessageBox.Show("No ha sido posible guardar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            SaveFileDialog SaveFile = new SaveFileDialog();
+            SaveFile.Filter = "Archivos txt|*.txt";
+            if (SaveFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    StreamWriter SW = new StreamWriter(SaveFile.FileName);
+                    for (int i = 0; i < dtgVariables.RowCount; i++)
+                    {
+                        for (int j = 0; j < dtgVariables.ColumnCount; j++)
+                        {
+                            SW.WriteLine(dtgVariables.Rows[i].Cells[j].Value);
+                        }
+                        SW.WriteLine("\n");
+                    }
+                    SW.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
         }
     }
 }

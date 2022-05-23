@@ -1,4 +1,4 @@
-INICIO { ;
+Inicio { ;
 /Esto es un comentario ;
 'Esto es un letrero ;
 bool bandera = true ;
