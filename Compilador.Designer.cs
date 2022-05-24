@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nuevoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,6 +39,7 @@
             this.programaFuenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tokensToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tablaDeSimbolosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tablaDeVariablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.limpiarTodoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.temaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +70,6 @@
             this.tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.variables = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.valor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tablaDeVariablesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.grpPFuente.SuspendLayout();
             this.grpTokens.SuspendLayout();
@@ -129,7 +129,7 @@
             this.tablaDeSimbolosToolStripMenuItem,
             this.tablaDeVariablesToolStripMenuItem});
             this.guardarToolStripMenuItem.Name = "guardarToolStripMenuItem";
-            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.guardarToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.guardarToolStripMenuItem.Text = "Guardar";
             this.guardarToolStripMenuItem.Click += new System.EventHandler(this.guardarToolStripMenuItem_Click);
             // 
@@ -153,6 +153,13 @@
             this.tablaDeSimbolosToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.tablaDeSimbolosToolStripMenuItem.Text = "Tabla de símbolos ";
             this.tablaDeSimbolosToolStripMenuItem.Click += new System.EventHandler(this.tablaDeSimbolosToolStripMenuItem_Click);
+            // 
+            // tablaDeVariablesToolStripMenuItem
+            // 
+            this.tablaDeVariablesToolStripMenuItem.Name = "tablaDeVariablesToolStripMenuItem";
+            this.tablaDeVariablesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.tablaDeVariablesToolStripMenuItem.Text = "Tabla de variables";
+            this.tablaDeVariablesToolStripMenuItem.Click += new System.EventHandler(this.tablaDeVariablesToolStripMenuItem_Click);
             // 
             // verToolStripMenuItem
             // 
@@ -311,14 +318,14 @@
             this.ID,
             this.nombreid,
             this.token});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Lime;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.Yellow;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.Desktop;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtgSimbolos.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Yellow;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.Desktop;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgSimbolos.DefaultCellStyle = dataGridViewCellStyle1;
             this.dtgSimbolos.GridColor = System.Drawing.Color.White;
             this.dtgSimbolos.Location = new System.Drawing.Point(6, 13);
             this.dtgSimbolos.Name = "dtgSimbolos";
@@ -370,14 +377,14 @@
             this.linea,
             this.error,
             this.desc});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Lime;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Yellow;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtgErrores.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Yellow;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgErrores.DefaultCellStyle = dataGridViewCellStyle2;
             this.dtgErrores.GridColor = System.Drawing.Color.White;
             this.dtgErrores.Location = new System.Drawing.Point(6, 19);
             this.dtgErrores.Name = "dtgErrores";
@@ -432,14 +439,14 @@
             this.tipo,
             this.variables,
             this.valor});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Lime;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.Yellow;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dtgVariables.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Lime;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Yellow;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dtgVariables.DefaultCellStyle = dataGridViewCellStyle3;
             this.dtgVariables.GridColor = System.Drawing.Color.White;
             this.dtgVariables.Location = new System.Drawing.Point(6, 19);
             this.dtgVariables.Name = "dtgVariables";
@@ -447,7 +454,6 @@
             this.dtgVariables.RowHeadersWidth = 51;
             this.dtgVariables.Size = new System.Drawing.Size(404, 184);
             this.dtgVariables.TabIndex = 0;
-            this.dtgVariables.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dtgVariables_RowsAdded);
             // 
             // idvar
             // 
@@ -476,13 +482,6 @@
             this.valor.MinimumWidth = 6;
             this.valor.Name = "valor";
             this.valor.ReadOnly = true;
-            // 
-            // tablaDeVariablesToolStripMenuItem
-            // 
-            this.tablaDeVariablesToolStripMenuItem.Name = "tablaDeVariablesToolStripMenuItem";
-            this.tablaDeVariablesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.tablaDeVariablesToolStripMenuItem.Text = "Tabla de variables";
-            this.tablaDeVariablesToolStripMenuItem.Click += new System.EventHandler(this.tablaDeVariablesToolStripMenuItem_Click);
             // 
             // FrmCompilador
             // 
