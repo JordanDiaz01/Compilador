@@ -26,28 +26,38 @@ namespace Compilador
             InitializeComponent();
         }
 
-            
+        //Declaracion de palabras reservadas
         private void Form1_Load(object sender, EventArgs e)
         {
             //Palabras reservadas
             PalabrasReservadas.Add(new Tuple<string, string>("readline","PR01"));
+            PalabrasReservadas.Add(new Tuple<string, string>("ReadLine", "PR01"));
             PalabrasReservadas.Add(new Tuple<string, string>("printin", "PR02"));
-
-            PalabrasReservadas.Add(new Tuple<string, string>("string", "PR03"));
-            PalabrasReservadas.Add(new Tuple<string, string>("int", "PR04"));
-            PalabrasReservadas.Add(new Tuple<string, string>("bool", "PR05"));
-            PalabrasReservadas.Add(new Tuple<string, string>("double", "PR06"));
-            PalabrasReservadas.Add(new Tuple<string, string>("const", "PR07"));
+            PalabrasReservadas.Add(new Tuple<string, string>("PrintIn", "PR02"));
 
             PalabrasReservadas.Add(new Tuple<string, string>("for", "PR08"));
             PalabrasReservadas.Add(new Tuple<string, string>("while", "PR09"));
             PalabrasReservadas.Add(new Tuple<string, string>("do", "PR10"));
             PalabrasReservadas.Add(new Tuple<string, string>("if", "PR11"));
             PalabrasReservadas.Add(new Tuple<string, string>("else", "PR12"));
+
             PalabrasReservadas.Add(new Tuple<string, string>("inicio", "PR13"));
             PalabrasReservadas.Add(new Tuple<string, string>("final", "PR14"));
-            PalabrasReservadas.Add(new Tuple<string, string>("INICIO", "PR13"));
-            PalabrasReservadas.Add(new Tuple<string, string>("FINAL", "PR14"));
+            PalabrasReservadas.Add(new Tuple<string, string>("Inicio", "PR13"));
+            PalabrasReservadas.Add(new Tuple<string, string>("Final", "PR14"));
+
+            //Tipos de datos
+            PalabrasReservadas.Add(new Tuple<string, string>("string", "PR03"));
+            PalabrasReservadas.Add(new Tuple<string, string>("int", "PR04"));
+            PalabrasReservadas.Add(new Tuple<string, string>("bool", "PR05"));
+            PalabrasReservadas.Add(new Tuple<string, string>("double", "PR06"));
+            PalabrasReservadas.Add(new Tuple<string, string>("const", "PR07"));
+            
+            PalabrasReservadas.Add(new Tuple<string, string>("String", "PR03"));
+            PalabrasReservadas.Add(new Tuple<string, string>("Int", "PR04"));
+            PalabrasReservadas.Add(new Tuple<string, string>("Bool", "PR05"));
+            PalabrasReservadas.Add(new Tuple<string, string>("Double", "PR06"));
+            PalabrasReservadas.Add(new Tuple<string, string>("Const", "PR07"));
 
             //Identificadores
             PalabrasReservadas.Add(new Tuple<string, string>("iden", "IDEN"));
@@ -65,6 +75,7 @@ namespace Compilador
             PalabrasReservadas.Add(new Tuple<string, string>(">=", "COMP03"));
             PalabrasReservadas.Add(new Tuple<string, string>("<=", "COMP04"));
             PalabrasReservadas.Add(new Tuple<string, string>("<>", "COMP05"));
+            PalabrasReservadas.Add(new Tuple<string, string>("==", "COMP06"));
 
             //Operadores Logicos
             PalabrasReservadas.Add(new Tuple<string, string>("&&", "LOG01"));
@@ -92,7 +103,7 @@ namespace Compilador
         {
 
         }
-        //Agregar en simbolos
+        //Agregar en simbolos o revision de palabras reservadas
         public string Encontrar(string PR)
         {
             foreach (var item in PalabrasReservadas)
@@ -112,18 +123,9 @@ namespace Compilador
 
                 }
             }
-            return null;
+            return "null";
         }
-
-        public string CheckCom(string STR, string FirstString, string LastString)
-        {
-            string FinalString;
-            int Pos1 = STR.IndexOf(FirstString) + FirstString.Length;
-            int Pos2 = STR.IndexOf(LastString);
-            FinalString = STR.Substring(Pos1, Pos2 - Pos1);
-            return FinalString;
-        }
-
+        //Funcion que encuentra variables
         public string CheckVariable(string var)
         {
             foreach (DataGridViewRow row in dtgVariables.Rows)
@@ -136,9 +138,15 @@ namespace Compilador
             }
             return "null";
         }
-
+        //  ____   ____ _______ ____  _   _   _____  _____  _____ _   _  _____ _____ _____        _      
+        // |  _ \ / __ \  __ __/ __ \| \ | | |  __ \|  __ \|_   _| \ | |/ ____|_   _|  __ \ /\   | |     
+        // | |_) | |  | | | | | |  | |  \| | | |__) | |__) | | | |  \| | |      | | | |__) /  \  | |     
+        // |   _<| |  | | | | | |  | | . ` | |  ___/|  _  /  | | | . ` | |      | | |  ___/ /\ \ | |     
+        // | |_) | |__| | | | | |__| | |\  | | |    | | \ \ _| |_| |\  | |____ _| |_| |  / ____ \| |____ 
+        // |____/ \____/  |_|  \____/|_| \_| |_|    |_|  \_\_____|_| \_|\_____|_____|_| /_/    \_\______|
         private void btnAnalisisLexico_Click(object sender, EventArgs e)
         {
+            //Validaciones por si esta vacio
             if (txtFuente.Text == "")
             {
                 MessageBox.Show("Introduzca codigo para continuar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -152,34 +160,63 @@ namespace Compilador
 
 
             //Identificadores
-            int fila = 0;
+            int fila = 0; //<-------- Contador de filas
+            int ide = 0; //<-------- Contador de identificadores
+            int palabra = 0; //<-------- Contador de palabras
 
-            int ide = 0;
-            int palabra = 0;
+            //Ciclo que recorre las lineas
             foreach (var iden in txtFuente.Lines)
             {
+                //Arreglo donde se guardan las palabras de una fila
                 string[] filadata = iden.Split();
+                //Ciclo que recorre las palabras de la fila del primer ciclo
                 foreach (var item in filadata)
                 {
-                    palabra++;
-                    if ((item == "int" || item == "string" || item == "bool" || item == "double" || item == "const") && CheckSintaxis(item, filadata,palabra))
+                    palabra++; //<-------- Contador de palabras
+                    //Parte de codigo donde se revisa si se esta instanciando una variable y checa su sintaxis
+                    try
                     {
-                        ide++;
-                        dtgVariables.Rows.Add("IDEN" + ide, item, filadata.ElementAt(palabra), filadata.ElementAt(palabra + 2));
+                        if ((item == "int" || item == "string" || item == "bool" || item == "double" || item == "const") && CheckSintaxis(item, filadata, palabra))
+                        {
+                            ide++;
+                            //Revisa la declaracion si esta bien escrita con contenido de variavles Ejemplo -> int a = x + y ;
+                            if (CheckVariable(filadata[palabra + 2]) != "null" && (filadata[palabra + 3] == "+" || filadata[palabra + 3] == "-" || filadata[palabra + 3] == "/" || filadata[palabra + 3] == "*" || filadata[palabra + 3] == "^") && CheckVariable(filadata[palabra + 4]) != "null")
+                            {
+                                string exp = filadata[palabra + 2] + " " + filadata[palabra + 3] + " " + filadata[palabra + 4];
+                                dtgVariables.Rows.Add("IDEN" + ide, item, filadata.ElementAt(palabra), exp);
+                            }
+                            else
+                            {
+                                //Lo mismo de arriba pero con contenido especifico Ejemplo -> int a = 12 ;
+                                dtgVariables.Rows.Add("IDEN" + ide, item, filadata.ElementAt(palabra), filadata.ElementAt(palabra + 2));
+                            }
+                        }
                     }
-                    else
-                    { }
+                    catch (Exception)
+                    {
+
+                        continue;
+                    }
+
                 }
+                //Reset de las palabras
                 palabra = 0;
             }
+            //Contador de los contenidos
             int contenido = 0;
-            //Tokens
+
+
+
+
+            //Separa todo el texto en palabras
             palabras = txtFuente.Text.Split();
+            //Ciclo donde recorre todas las palabras del codigo fuente
             for (int i = 0; i < palabras.Length; i++)
             {
-                bool Esta = false;
-                char[] charArray;
-                string first;
+                bool Esta = false; //<-------- Bandera de validacion para los comentarios y letreros
+                char[] charArray; //<-------- Arreglo de letras de la primera palabra
+                string first; //<-------- Primer caracter de las palabras
+                //Try-Catch que toma el primer caracter para hacer comparaciones
                 try
                 {
                     charArray = palabras[i].ToCharArray();
@@ -187,100 +224,135 @@ namespace Compilador
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error en la captura del codigo fuente intentelo otra vez");
-                    return;
+                    continue;
+                }
+                //  _______  ____  _  ________ _   _  _____
+                // |__   __ / __ \| |/ /  ____| \ | |/ ____|
+                //    | |  | |  | | ' /| |__  |  \| | (___  
+                //    | |  | |  | |  < |  __| | . ` |\___ \ 
+                //    | |  | |__| | . \| |____| |\  |____) |
+                //    |_|   \____/|_|\_\______|_| \_|_____/
+                //Creacion de tokens
+                try
+                {
+                    //Tokens Normales
+                    if (PalabrasReservadas.Any(m => m.Item1 == palabras[i]))
+                    {
+                        txtTokens.AppendText(Encontrar(palabras[i]) + " ");
+                    }
+                    //Salto de linea
+                    else if (palabras[i] == ";")
+                    {
+                        txtTokens.AppendText(";\n");
+                    }
+                    //Checkeo de variables en el codigo
+                    else if (CheckVariable(palabras[i]) != "null")
+                    {
+                        txtTokens.AppendText(CheckVariable(palabras[i]) + " ");
+                    }
+                    //Comentario
+                    else if (first == "/")
+                    {
+                        while (palabras[i] != ";" || Encontrar(palabras[i]) != "null")
+                        {
+                            i++;
+                        }
+                        txtTokens.AppendText("COM ;\n");
+                        foreach (DataGridViewRow row in dtgSimbolos.Rows)
+                        {
+                            string codigo = Convert.ToString(row.Cells["token"].Value);
+                            if ("COM" == codigo)
+                            {
+                                Esta = true;
+                            }
+                        }
+                        if (!Esta)
+                        {
+                            dtgSimbolos.Rows.Add(id, "Comentario", "COM");
+                            Esta = false;
+                        }
+                    }
+                    //Letrero
+                    else if (first == "\'")
+                    {
+                        while (palabras[i] != ";" || Encontrar(palabras[i]) != "null")
+                        {
+                            i++;
+                        }
+                        txtTokens.AppendText("LET ;\n");
+                        foreach (DataGridViewRow row in dtgSimbolos.Rows)
+                        {
+                            string codigo = Convert.ToString(row.Cells["token"].Value);
+                            if ("LET" == codigo)
+                            {
+                                Esta = true;
+                            }
+                        }
+                        if (!Esta)
+                        {
+                            dtgSimbolos.Rows.Add(id, "Letrero", "LET");
+                            Esta = false;
+                        }
+                    }
+                    //Checkeo de contenidos
+                    else if (i != 0 && palabras[i - 1] == "=" && CheckVariable(palabras[i - 2]) != "null")
+                    {
+                        contenido++;
+                        txtTokens.AppendText("CONT "+contenido);
+                        //Revision si es decimal
+                        if (Regex.IsMatch(palabras[i], @"^\d{0,10}[.]\d{0,10}"))
+                        {
+                            dtgVariables.Rows.Add("CONT" + contenido, "Decimal", "CONT" + contenido, palabras[i]);
+                        }
+                        //Revision si es entero
+                        else if (Regex.IsMatch(palabras[i], @"^\d{0,10}"))
+                        {
+                            dtgVariables.Rows.Add("CONT" + contenido, "Entero", "CONT" + contenido, palabras[i]);
+                        }
+                    }
+                    //Numeros adentro de parentesis
+                    else if (i != 0 && (palabras[i - 1] == "(" && Regex.IsMatch(palabras[i], @"^[0-9]+$")) || (Regex.IsMatch(palabras[i], @"^[0-9]+$") && palabras[i + 1] == ")"))
+                    {
+                        txtTokens.AppendText("NUM ");
+                    }
+                    //Si nada de lo anterior concuerda entonces es ERROR
+                    else
+                    {
+
+                        txtTokens.AppendText("ERROR ");
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                    continue;
                 }
 
-                //Tokens Normales
-                if (PalabrasReservadas.Any(m => m.Item1 == palabras[i]))
-                {
-                    txtTokens.AppendText(Encontrar(palabras[i]) + " ");
-                }
-                //Salto de linea
-                else if (palabras[i] == ";")
-                {
-                    txtTokens.AppendText(";\n");
-                }
-                //Checkeo de variables en el codigo
-                else if(CheckVariable(palabras[i]) != "null")
-                {
-                    txtTokens.AppendText(CheckVariable(palabras[i]) + " ");
-                }
-                //Comentario
-                else if (first == "/")
-                {
-                    while (palabras[i] != ";")
-                    {
-                        i++;
-                    }
-                    txtTokens.AppendText("COM ;\n");
-                    foreach (DataGridViewRow row in dtgSimbolos.Rows)
-                    {
-                        string codigo = Convert.ToString(row.Cells["token"].Value);
-                        if ("COM" == codigo)
-                        {
-                            Esta = true;
-                        }
-                    }
-                    if (!Esta)
-                    {
-                        dtgSimbolos.Rows.Add(id, "Comentario", "COM");
-                        Esta = false;
-                    }
-                }
-                //Letrero
-                else if (first == "\'")
-                {
-                    while (palabras[i] != ";")
-                    {
-                        i++;
-                    }
-                    txtTokens.AppendText("LET ;\n");
-                    foreach (DataGridViewRow row in dtgSimbolos.Rows)
-                    {
-                        string codigo = Convert.ToString(row.Cells["token"].Value);
-                        if ("LET" == codigo)
-                        {
-                            Esta = true;
-                        }
-                    }
-                    if (!Esta)
-                    {
-                        dtgSimbolos.Rows.Add(id, "Letrero", "LET");
-                        Esta = false;
-                    }
-                }
-                //Checkeo de contenidos
-                else if (i != 0 && palabras[i - 1] == "=")
-                {
-                    contenido++;
-                    txtTokens.AppendText("CONT"+contenido);
-                }
-                else
-                {
-                    txtTokens.AppendText("ERROR ");
-                }
+
             }
-            //Errores
+            //Recopilacion de Errores y escritos en dtgErrores
             fila = 0;
+            int numpal = 0;
             foreach (var item in txtTokens.Lines)
             {
+                numpal = 0;
                 fila++;
                 string[] filadata = item.Split();
 
                 foreach (var err in filadata)
                 {
+                    numpal++;
                     if (err == "ERROR")
                     {
-                        dtgErrores.Rows.Add(fila, err, "error de sintaxis");
+                        dtgErrores.Rows.Add(fila, err, "Error en la fila " + fila + " palabra " + numpal);
                     }
                 }
-
             }
+
         }
 
-        
-
+        //Funcion donde checa la sintaxis y validacion de concordancia entre tipo de dato y contenido del dato Ejemplo: int a = "Hola" <-- Esto es lo que revisa esta funcion
         public bool CheckSintaxis(string tipo,string[] data,int palabra)
         {
             string nombre = data.ElementAt(palabra);
@@ -309,7 +381,7 @@ namespace Compilador
                     return false;
 
                 case "string":
-                    if (!Regex.IsMatch(valor, @"^[0-9]+$"))
+                    if (!Regex.IsMatch(valor, @"^[0-9]\d{0,10} +$"))
                     {
                         return true;
                     }
@@ -323,7 +395,7 @@ namespace Compilador
                     return false;
 
                 case "double":
-                    if (Regex.IsMatch(valor, @"^[0-9]+$"))
+                    if (Regex.IsMatch(valor, @"^\d{0,10}[.]\d{0,10}"))
                     {
                         return true;
                     }
@@ -337,7 +409,7 @@ namespace Compilador
             }
         }
 
-        //Esta madre sirve para las lineas
+        //Cada vez que el programa detecte un enter se suman los numeros de la izquierda
         int ICodigo = 0;
         private void txtFuente_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -359,16 +431,20 @@ namespace Compilador
                 }
             }
         }
-        private void txtFuente_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                txtFuente.AppendText(" ;");
-            }
-        }
-
+        //Carga de archivos .xd para el codigo fuente
         private void abriToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            id = 0;
+            ICodigo = 0;
+            txtFuente.Text = "";
+            txtTokens.Text = "";
+            txtLineaTokens.Text = "";
+            txtNumLineaFuente.Text = "";
+
+            dtgErrores.Rows.Clear();
+            dtgSimbolos.Rows.Clear();
+            dtgVariables.Rows.Clear();
+
             string linea, archivo;
             txtFuente.Clear();
             OpenFileDialog openFile = new OpenFileDialog();
@@ -405,11 +481,12 @@ namespace Compilador
 
         int id = 1;
 
+        //Contador de registros en la tabla de simbolos
         private void dtgSimbolos_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             id++;
         }
-        //Fuente
+        //Guardado de codigo Fuente en archivos .xd
         private void programaFuenteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (txtFuente.Text == "")
@@ -436,7 +513,7 @@ namespace Compilador
                 }
             }
         }
-        //Tokens
+        //Guardado de Tokens en txt
         private void tokensToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (txtTokens.Text == "")
@@ -463,7 +540,7 @@ namespace Compilador
                 }
             }
         }
-        //Simbolos
+        //Guardado de tabla de Simbolos en txt
         private void tablaDeSimbolosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (dtgSimbolos.RowCount == 0)
@@ -494,14 +571,14 @@ namespace Compilador
                 }
             }
         }
-
+        //Forma que muestra el Acerca De
         private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             AcercaDe acercade = new AcercaDe();
             acercade.Show();
         }
-
+        //Limpia todo el programa
         private void limpiarTodoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             id = 0;
@@ -515,7 +592,7 @@ namespace Compilador
             dtgSimbolos.Rows.Clear();
             dtgVariables.Rows.Clear();
         }
-
+        //Modo Oscuro
         private void oscuroToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.DimGray;
@@ -531,15 +608,15 @@ namespace Compilador
             dtgSimbolos.DefaultCellStyle.ForeColor = Color.Lime;
             dtgVariables.DefaultCellStyle.ForeColor = Color.Lime;
 
-            dtgVariables.DefaultCellStyle.BackColor = Color.Black;
+            dtgErrores.DefaultCellStyle.BackColor = Color.Black;
             dtgSimbolos.DefaultCellStyle.BackColor = Color.Black;
             dtgVariables.DefaultCellStyle.BackColor = Color.Black;
 
-            dtgVariables.DefaultCellStyle.SelectionBackColor = Color.Yellow;
+            dtgErrores.DefaultCellStyle.SelectionBackColor = Color.Yellow;
             dtgSimbolos.DefaultCellStyle.SelectionBackColor = Color.Yellow;
             dtgVariables.DefaultCellStyle.SelectionBackColor = Color.Yellow;
 
-            dtgVariables.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dtgErrores.DefaultCellStyle.SelectionForeColor = Color.Black;
             dtgSimbolos.DefaultCellStyle.SelectionForeColor = Color.Black;
             dtgVariables.DefaultCellStyle.SelectionForeColor = Color.Black;
 
@@ -553,7 +630,7 @@ namespace Compilador
             txtLineaTokens.ForeColor = Color.Lime;
             txtNumLineaFuente.ForeColor = Color.Lime;
         }
-
+        //Modo Claro
         private void claroToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.LightGray;
@@ -569,15 +646,15 @@ namespace Compilador
             dtgSimbolos.DefaultCellStyle.ForeColor = Color.Black;
             dtgVariables.DefaultCellStyle.ForeColor = Color.Black;
 
-            dtgVariables.DefaultCellStyle.BackColor = Color.DarkGray;
+            dtgErrores.DefaultCellStyle.BackColor = Color.DarkGray;
             dtgSimbolos.DefaultCellStyle.BackColor = Color.DarkGray;
             dtgVariables.DefaultCellStyle.BackColor = Color.DarkGray;
 
-            dtgVariables.DefaultCellStyle.SelectionBackColor = Color.Blue;
+            dtgErrores.DefaultCellStyle.SelectionBackColor = Color.Blue;
             dtgSimbolos.DefaultCellStyle.SelectionBackColor = Color.Blue;
             dtgVariables.DefaultCellStyle.SelectionBackColor = Color.Blue;
 
-            dtgVariables.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dtgErrores.DefaultCellStyle.SelectionForeColor = Color.Black;
             dtgSimbolos.DefaultCellStyle.SelectionForeColor = Color.Black;
             dtgVariables.DefaultCellStyle.SelectionForeColor = Color.Black;
 
@@ -591,7 +668,7 @@ namespace Compilador
             txtLineaTokens.ForeColor = Color.Black;
             txtNumLineaFuente.ForeColor = Color.Black;
         }
-
+        //Es la misma estupidez que limpia todo el programa solo que con validaciones
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("¿Esta seguro que quiere crear uno nuevo?", "Confirmacion", MessageBoxButtons.YesNo);
@@ -611,6 +688,43 @@ namespace Compilador
                 dtgErrores.Rows.Clear();
                 dtgSimbolos.Rows.Clear();
                 dtgVariables.Rows.Clear();
+            }
+        }
+        //Forma que muestra la documentacion
+        private void documentacionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Documentacion doc = new Documentacion();
+            doc.Show();
+        }
+        //Guardado de la tabla de variables
+        private void tablaDeVariablesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dtgVariables.RowCount == 0)
+            {
+                MessageBox.Show("No ha sido posible guardar el archivo", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            SaveFileDialog SaveFile = new SaveFileDialog();
+            SaveFile.Filter = "Archivos txt|*.txt";
+            if (SaveFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                try
+                {
+                    StreamWriter SW = new StreamWriter(SaveFile.FileName);
+                    for (int i = 0; i < dtgVariables.RowCount; i++)
+                    {
+                        for (int j = 0; j < dtgVariables.ColumnCount; j++)
+                        {
+                            SW.WriteLine(dtgVariables.Rows[i].Cells[j].Value);
+                        }
+                        SW.WriteLine("\n");
+                    }
+                    SW.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message);
+                }
             }
         }
     }
