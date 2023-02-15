@@ -32,8 +32,8 @@ namespace Compilador
             //Palabras reservadas
             PalabrasReservadas.Add(new Tuple<string, string>("readline","PR01"));
             PalabrasReservadas.Add(new Tuple<string, string>("ReadLine", "PR01"));
-            PalabrasReservadas.Add(new Tuple<string, string>("printin", "PR02"));
-            PalabrasReservadas.Add(new Tuple<string, string>("PrintIn", "PR02"));
+            PalabrasReservadas.Add(new Tuple<string, string>("println", "PR02"));
+            PalabrasReservadas.Add(new Tuple<string, string>("Println", "PR02"));
 
             PalabrasReservadas.Add(new Tuple<string, string>("for", "PR08"));
             PalabrasReservadas.Add(new Tuple<string, string>("while", "PR09"));
@@ -164,23 +164,52 @@ namespace Compilador
             int ide = 0; //<-------- Contador de identificadores
             int palabra = 0; //<-------- Contador de palabras
 
+            char[] charArray1; //<-------- Arreglo de letras de la primera palabra
+            string first1; //<-------- Primer caracter de las palabras
+
             //Ciclo que recorre las lineas
             foreach (var iden in txtFuente.Lines)
             {
+                bool isValidLexic = false;
                 //Arreglo donde se guardan las palabras de una fila
                 string[] filadata = iden.Split();
                 //Ciclo que recorre las palabras de la fila del primer ciclo
+
+                charArray1 = iden.ToCharArray();
+                first1 = charArray1[0].ToString();
                 foreach (var item in filadata)
                 {
                     palabra++; //<-------- Contador de palabras
-                    //Parte de codigo donde se revisa si se esta instanciando una variable y checa su sintaxis
-                    try
+                    //Revisa si la palabra esta bien escrita
+                    isValidLexic = PalabrasReservadas.Any(x => x.Item1 == item);
+
+                    //Checa el lexico de las palabras
+                    if (!isValidLexic)
                     {
-                        if ((item == "int" || item == "string" || item == "bool" || item == "double" || item == "const") && CheckSintaxis(item, filadata, palabra))
+                        if (first1 == "/" || first1 == "\'")
+                        {
+                            Console.WriteLine(iden);
+                            break;
+                        }
+                        else if (item != ";")
+                        {
+                            dtgErrores.Rows.Add(fila, "LEXICO", item);
+                        }
+                    }
+                    else if (item.ToLower() == "int" || item.ToLower() == "string" || item.ToLower() == "bool" || item.ToLower() == "double" || item.ToLower() == "const")
+                    {
+                        if (!CheckSintaxis(item, filadata, palabra))
+                        {
+                            dtgErrores.Rows.Add(fila, "SINTAXIS", item);
+                            break;
+                        }
+                        //Parte de codigo donde se revisa si se esta instanciando una variable y checa su sintaxis
+                        else
                         {
                             ide++;
+                            Console.WriteLine(filadata[palabra + 2].GetType());
                             //Revisa la declaracion si esta bien escrita con contenido de variavles Ejemplo -> int a = x + y ;
-                            if (CheckVariable(filadata[palabra + 2]) != "null" && (filadata[palabra + 3] == "+" || filadata[palabra + 3] == "-" || filadata[palabra + 3] == "/" || filadata[palabra + 3] == "*" || filadata[palabra + 3] == "^") && CheckVariable(filadata[palabra + 4]) != "null")
+                            if ((CheckVariable(filadata[palabra + 2]) != "null" || filadata[palabra + 2].GetType() == typeof(int)) && (filadata[palabra + 3] == "+" || filadata[palabra + 3] == "-" || filadata[palabra + 3] == "/" || filadata[palabra + 3] == "*" || filadata[palabra + 3] == "^") && (CheckVariable(filadata[palabra + 4]) != "null" || filadata[palabra + 4].GetType() == typeof(int)))
                             {
                                 string exp = filadata[palabra + 2] + " " + filadata[palabra + 3] + " " + filadata[palabra + 4];
                                 dtgVariables.Rows.Add("IDEN" + ide, item, filadata.ElementAt(palabra), exp);
@@ -190,14 +219,10 @@ namespace Compilador
                                 //Lo mismo de arriba pero con contenido especifico Ejemplo -> int a = 12 ;
                                 dtgVariables.Rows.Add("IDEN" + ide, item, filadata.ElementAt(palabra), filadata.ElementAt(palabra + 2));
                             }
+                            break;
                         }
                     }
-                    catch (Exception)
-                    {
-
-                        continue;
-                    }
-
+                    
                 }
                 //Reset de las palabras
                 palabra = 0;
@@ -315,11 +340,11 @@ namespace Compilador
                     {
                         txtTokens.AppendText("NUM ");
                     }
-                    //Si nada de lo anterior concuerda entonces es ERROR
+                    //Si nada de lo anterior concuerda entonces es ERROR DE SINTAXIS
                     else
                     {
 
-                        txtTokens.AppendText("ERROR ");
+                        txtTokens.AppendText("SINTAX_ERROR ");
                     }
 
                 }
@@ -343,9 +368,9 @@ namespace Compilador
                 foreach (var err in filadata)
                 {
                     numpal++;
-                    if (err == "ERROR")
+                    if (err == "SINTAX_ERROR")
                     {
-                        dtgErrores.Rows.Add(fila, err, "Error en la fila " + fila + " palabra " + numpal);
+                        dtgErrores.Rows.Add(fila, "SINTAX", "Error en la fila " + fila + " palabra " + numpal);
                     }
                 }
             }
